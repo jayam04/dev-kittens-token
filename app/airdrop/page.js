@@ -1,5 +1,6 @@
 import styles from "./airdrop.module.sass"
 import Image from "next/image"
+import Link from "next/link"
 
 export const metadata = {
     "title": "airdrop",
@@ -11,14 +12,15 @@ export default function Page() {
     return (
         <div className={styles.root}>
             <div className={styles.root_title}>
+                <Link href="/">
                 <Image 
-                    src="/sticker.png"
+                    src="/favicon.ico"
                     width={50}
                     height={50}
                     className={styles.root_title_logo}
-                ></Image>
+                ></Image></Link>
             <h3 className={styles.title}>
-                dev kitten's token / airdrop
+                dev kitten's token / airdrop (devnet)
             </h3>
             </div>
 
