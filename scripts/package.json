@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@metaplex-foundation/js": "^0.18.3",
+    "@solana/web3.js": "^1.73.3"
+  }
+}
