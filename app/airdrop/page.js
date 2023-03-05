@@ -13,12 +13,12 @@ export default function Page() {
         <div className={styles.root}>
             <div className={styles.root_title}>
                 <Link href="/">
-                <Image 
+                <img 
                     src="/favicon.ico"
                     width={50}
                     height={50}
                     className={styles.root_title_logo}
-                ></Image></Link>
+                ></img></Link>
             <h3 className={styles.title}>
                 dev kitten's token / airdrop (devnet)
             </h3>

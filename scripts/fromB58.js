@@ -1,3 +1,11 @@
+/*
+    helper that converts bs58 string to uint8 array
+    credits: [Daniel Roesler](https://gist.github.com/diafygi)
+    web: https://gist.github.com/diafygi/90a3e80ca1c2793220e5/
+*/
+
+
+
 export default function from_b58(
     S            //Base58 encoded string input
     // A             //Base58 characters (i.e. "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
