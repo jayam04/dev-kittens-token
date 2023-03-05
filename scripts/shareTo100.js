@@ -4,7 +4,7 @@ import * as web3 from "@solana/web3.js"
 import from_b58 from "./fromB58.js";
 import transfer from "./transfer.js";
 
-import array from "./secrets/keys/the-sol-project.json" assert {type: "json"}
+import array from "../secrets/keys/the-sol-project.json" assert {type: "json"}
 
 
 

@@ -6,7 +6,7 @@
 // import array from "./secrets/keys/the-sol-project.json" assert {type: "json"}
 const web3 = require('@solana/web3.js')
 const ThirdwebSDK = require('@thirdweb-dev/sdk/solana')
-const array = require("./secrets/keys/the-sol-project.json")
+const array = require("../secrets/keys/the-sol-project.json")
 const bs58 = require("bs58")
 
 
