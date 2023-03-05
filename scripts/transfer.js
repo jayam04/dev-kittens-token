@@ -1,6 +1,7 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/solana";
 
 export default async function transfer(amount, recipient, signer) {
+    // start some sdks
     const sdk = ThirdwebSDK.fromNetwork("devnet");
     sdk.wallet.connect(signer);
 
@@ -10,6 +11,16 @@ export default async function transfer(amount, recipient, signer) {
         "token"
     );
 
-    const tx = await program.transfer(recipient, amount);
-}
 
+    // transaction
+    try {
+        const tx = await program.transfer(recipient, amount);
+        return tx
+    }
+    catch (exc) {
+        if (exc.message === "Invalid public key input") {
+            return {"error": "invalid_key"}
+        }
+        return {"error": "unknown"}
+    }
+}
