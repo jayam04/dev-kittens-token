@@ -21,9 +21,9 @@ for (var i = 0; i < 100; i++) {
     );
 
     if (result["signature"]) {
-    console.log(`transfered to account ${recipient.publicKey}`)
+    console.log(`transfered to account ${recipient.publicKey} numbered ${1}`)
     }
     else {
-        console.log(`error occured : ${result["error"]}`)
+        console.log(`error occured : ${result["error"]} numbered ${i + 1}`)
     }
 }
