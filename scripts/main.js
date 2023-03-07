@@ -4,7 +4,17 @@ import transfer from "./transfer.js"
 import from_b58 from "./fromB58.js";
 import array from "../secrets/keys/the-sol-project.json" assert {type: "json"}
 
+
+// const form = document.getElementById("airdrop_form")
+
+// const formData = new FormData(form)
+// console.log(formData)
+
+
 let signerKeypair = web3.Keypair.fromSecretKey(from_b58(array[0]))
-var result = await transfer(12, "7Hu3cwxM8DPah7kTNUYdozsvez4ddJcnVahYi3eKf3TU", signerKeypair)
+console.log(signerKeypair)
+// var result = await transfer(12, "7Hu3cwxM8DPah7kTNUYdozsvez4ddJcnVahYi3eKf3TU", signerKeypair)
 // var result = await transfer(12, "abc", signerKeypair)
-console.log(result)
+// console.log(result)
+
+

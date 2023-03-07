@@ -10,7 +10,7 @@ import array from "../secrets/keys/the-sol-project.json" assert {type: "json"}
 
 let signerKeypair = web3.Keypair.fromSecretKey(from_b58(array[0]));
 
-for (var i = 0; i < 1; i++) {
+for (var i = 0; i < 100; i++) {
     const recipient = web3.Keypair.generate()
     const random_no = Math.random()
 
