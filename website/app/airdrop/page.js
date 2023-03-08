@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/solana";
 import * as web3 from "@solana/web3.js";
-import { red } from "bn.js";
+// import array from "../../../secrets/keys/the-sol-project.json" assert {type: "json"}
 
 // export const metadata = {
 //     title: "airdrop",
@@ -14,7 +14,11 @@ import { red } from "bn.js";
 //         "airdrop of dev kitten's token - spl token created by @devkitten",
 // };
 
+
+
 export default function Page() {
+    const secretKey = process.env.ABC123_PRIVATE_KEY
+    console.log(secretKey)
     console.log("page!");
 
     const searchParams = useSearchParams();
@@ -58,7 +62,7 @@ export default function Page() {
         if (amount && address) {
             let signer = web3.Keypair.fromSecretKey(
                 from_b58(
-                    "2E6EK7HfG6tR45nvswPsNnTAVehkJbxi9gdmJ1PQnjSee9Rr3vQhvkN7SiQu9vXg9UFTb6o5jkjc2KN9hXzBfhip"
+                    secretKey
                 )
             );
             // start some sdks
