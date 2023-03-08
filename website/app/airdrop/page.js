@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/solana";
 import * as web3 from "@solana/web3.js";
-import array from "../../../secrets/keys/the-sol-project.json" assert {type: "json"}
+// import array from "../../../secrets/keys/the-sol-project.json" assert {type: "json"}
 
 // export const metadata = {
 //     title: "airdrop",
