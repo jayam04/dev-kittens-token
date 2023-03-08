@@ -74,12 +74,15 @@ export default function Page() {
             // transaction
             try {
                 const tx = await program.transfer(address, amount);
-                setTransaction({"signature": tx.signature, "error": null})
-                console.log('tx', tx)
+                setTransaction({ signature: tx.signature, error: null });
+                console.log("tx", tx);
                 // return tx;
             } catch (exc) {
                 if (exc.message === "Invalid public key input") {
-                    setTransaction({"signature": null, "error": "invalid public key!"})
+                    setTransaction({
+                        signature: null,
+                        error: "invalid public key!",
+                    });
                     // return { error: "invalid_key" };
                 }
                 // return { error: "unknown" };
@@ -94,6 +97,7 @@ export default function Page() {
             {/* <p style={{color: red}}>{transction.error}</p> */}
 
             <Title />
+            <Warning />
 
             {/* form */}
             <div className={styles.form} id="airdrop_form">
@@ -191,6 +195,17 @@ function Transaction({ transaction }) {
                 <p className={styles.transaction_sig}>signature: {signature}</p>
             </div>
         );
+}
+
+function Warning() {
+    return (
+        <div className={styles.warning}>
+            <p className={styles.warning_text}>
+                we regret website being buggy. if error occurs transaction may
+                still be completed, make sure to check your wallet in devnet.
+            </p>
+        </div>
+    );
 }
 
 function Footer() {
