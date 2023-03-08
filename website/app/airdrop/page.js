@@ -14,10 +14,11 @@ import * as web3 from "@solana/web3.js";
 //         "airdrop of dev kitten's token - spl token created by @devkitten",
 // };
 
-const secretKey = process.env.ABC123_PRIVATE_KEY
 
 
 export default function Page() {
+    const secretKey = process.env.ABC123_PRIVATE_KEY
+    console.log(secretKey)
     console.log("page!");
 
     const searchParams = useSearchParams();
