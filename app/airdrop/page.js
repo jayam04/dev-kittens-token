@@ -8,11 +8,7 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk/solana";
 import * as web3 from "@solana/web3.js";
 // import array from "../../../secrets/keys/the-sol-project.json" assert {type: "json"}
 
-// export const metadata = {
-//     title: "airdrop",
-//     description:
-//         "airdrop of dev kitten's token - spl token created by @devkitten",
-// };
+
 
 
 
@@ -22,16 +18,16 @@ export default function Page() {
     console.log("page!");
 
     const searchParams = useSearchParams();
-    var address = searchParams.get("address");
-    var amount = searchParams.get("amount");
+    const address = searchParams.get("address");
+    let amount = searchParams.get("amount");
 
-    const [txComponent, setTxComponent] = useState(true);
+    const [txComponent, setTxComponent] = useState(false);
 
     // no transaction comp - runs once page is init
     useEffect(() => {
-        if (!address && !amount) {
-            console.log("no tx component!");
-            setTxComponent(false);
+        if (address || amount) {
+            console.log("tx component!");
+            setTxComponent(true);
         }
     }, []);
 
@@ -41,23 +37,24 @@ export default function Page() {
         warn: null,
     });
 
-    useEffect(async () => {
-        console.log("checkpoint: useEffect()");
-        if (!address) {
-            setTransaction({
-                signature: null,
-                error: "no address found!",
-                warn: null,
-            });
-        } else if (!amount) {
-            setTransaction({
-                signature: null,
-                error: null,
-                warn: "no amount found, will airdrop 26 DVKITN",
-            });
-            amount = 26;
-        }
-        console.log("checkpoint: useEffect() 2");
+    useEffect(() => {
+        const asyncFunction = async () => {
+            console.log("checkpoint: useEffect()");
+            if (!address) {
+                setTransaction({
+                    signature: null,
+                    error: "no address found!",
+                    warn: null,
+                });
+            } else if (!amount) {
+                setTransaction({
+                    signature: null,
+                    error: null,
+                    warn: "no amount found, will airdrop 26 DVKITN",
+                });
+                amount = 26;
+            }
+            console.log("checkpoint: useEffect() 2");
 
         if (amount && address) {
             let signer = web3.Keypair.fromSecretKey(
@@ -69,29 +66,32 @@ export default function Page() {
             const sdk = ThirdwebSDK.fromNetwork("devnet");
             sdk.wallet.connect(signer);
 
-            // Get the interface for your token program
-            const program = await sdk.getProgram(
-                "Ht2Cb7VJC7y1tedTLc5dqxLi1wQUU8qvE8N7i7xtNBiD",
-                "token"
-            );
+                // Get the interface for your token program
+                const program = await sdk.getProgram(
+                    "Ht2Cb7VJC7y1tedTLc5dqxLi1wQUU8qvE8N7i7xtNBiD",
+                    "token"
+                );
 
-            // transaction
-            try {
-                const tx = await program.transfer(address, amount);
-                setTransaction({ signature: tx.signature, error: null });
-                console.log("tx", tx);
-                // return tx;
-            } catch (exc) {
-                if (exc.message === "Invalid public key input") {
-                    setTransaction({
-                        signature: null,
-                        error: "invalid public key!",
-                    });
-                    // return { error: "invalid_key" };
+                // transaction
+                try {
+                    const tx = await program.transfer(address, amount);
+                    setTransaction({ signature: tx.signature, error: null });
+                    console.log("tx", tx);
+                    // return tx;
+                } catch (exc) {
+                    if (exc.message === "Invalid public key input") {
+                        setTransaction({
+                            signature: null,
+                            error: "invalid public key!",
+                        });
+                        // return { error: "invalid_key" };
+                    }
+                    // return { error: "unknown" };
                 }
-                // return { error: "unknown" };
             }
         }
+
+        asyncFunction()
     }, []);
 
     return (
@@ -166,7 +166,7 @@ function Transaction({ transaction }) {
                 ) : (
                     <></>
                 )}
-                <p className={styles.transaction_loading}>working hard ....</p>
+                <p className={styles.transaction_loading}>creating transaction ....</p>
             </div>
         );
 
@@ -196,7 +196,10 @@ function Transaction({ transaction }) {
                 ) : (
                     <></>
                 )}
-                <p className={styles.transaction_sig}>signature: {signature}</p>
+                <p className={styles.transaction_sig}>signature: {transaction["signature"]}</p>
+                <a className={styles.transaction_sig_solscan}
+                href={`https://solscan.io/tx/${transaction["signature"]}?cluster=devnet`}
+                >view on solscan</a>
             </div>
         );
 }
