@@ -6,9 +6,15 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/solana";
 import * as web3 from "@solana/web3.js";
+// import array from "../../../secrets/keys/the-sol-project.json" assert {type: "json"}
+
+
+
 
 
 export default function Page() {
+    const secretKey = process.env.ABC123_PRIVATE_KEY
+    console.log(secretKey)
     console.log("page!");
 
     const searchParams = useSearchParams();
@@ -50,15 +56,15 @@ export default function Page() {
             }
             console.log("checkpoint: useEffect() 2");
 
-            if (amount && address) {
-                let signer = web3.Keypair.fromSecretKey(
-                    from_b58(
-                        "2E6EK7HfG6tR45nvswPsNnTAVehkJbxi9gdmJ1PQnjSee9Rr3vQhvkN7SiQu9vXg9UFTb6o5jkjc2KN9hXzBfhip"
-                    )
-                );
-                // start some sdks
-                const sdk = ThirdwebSDK.fromNetwork("devnet");
-                sdk.wallet.connect(signer);
+        if (amount && address) {
+            let signer = web3.Keypair.fromSecretKey(
+                from_b58(
+                    secretKey
+                )
+            );
+            // start some sdks
+            const sdk = ThirdwebSDK.fromNetwork("devnet");
+            sdk.wallet.connect(signer);
 
                 // Get the interface for your token program
                 const program = await sdk.getProgram(
